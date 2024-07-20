@@ -6,114 +6,175 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
-        /* only demo styles */
-
-        body {
-            font-family: 'Poppins', sans-serif;
+        *{
+            box-sizing: border-box;
+            user-select: none
         }
 
-        /* end only demo styles */
-
-        .checkbox-custom, .radio-custom {
-            opacity: 0;
-            position: absolute;
-        }
-
-        .checkbox-custom, .checkbox-custom-label, .radio-custom, .radio-custom-label {
-            display: inline-block;
-            vertical-align: middle;
-            margin: 5px;
+        .form-checkbox__label {
+            user-select: none;
+            display: flex;
+            align-items: center;
+            cursor: pointer; }
+        .form-checkbox__label > span {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 8px;
+            width: 16px;
+            height: 16px;
+            background: transparent;
+            border: 1.6px solid blue;
+            border-radius: 2px;
             cursor: pointer;
-        }
+            transition: all 150ms cubic-bezier(0.4, 0, 0.23, 1);
+            position: relative; }
 
-        .checkbox-custom-label, .radio-custom-label {
-            position: relative;
-        }
+        .form-checkbox__checkbox {
+            display: none; }
+        .form-checkbox__checkbox:checked + span {
+            border: .5em solid blue;
+            animation: shrink-bounce 150ms cubic-bezier(0.4, 0, 0.23, 1); }
+        .form-checkbox__checkbox:checked + span:before {
+            content: "";
+            position: absolute;
+            top: -1.6px;
+            left: -5.6px;
+            border-right: 2px solid transparent;
+            border-bottom: 2px solid transparent;
+            transform: rotate(45deg);
+            transform-origin: 0% 100%;
+            animation: checkbox-check 200ms 150ms cubic-bezier(0.4, 0, 0.23, 1) forwards; }
 
-        .checkbox-custom + .checkbox-custom-label:before, .radio-custom + .radio-custom-label:before {
-            content: '';
-            background: #fff;
-            border: 2px solid #ddd;
-            display: inline-block;
-            vertical-align: middle;
-            width: 20px;
-            height: 20px;
-            padding: 2px;
-            margin-right: 10px;
-            text-align: center;
-        }
+        @keyframes shrink-bounce {
+            0% {
+                transform: scale(1); }
+            33% {
+                transform: scale(0.85); }
+            100% {
+                transform: scale(1); } }
 
-        .checkbox-custom:checked + .checkbox-custom-label:before {
-            content: "\f00c";
-            font-family: 'FontAwesome';
-            background: rebeccapurple;
-            color: #fff;
-        }
+        @keyframes checkbox-check {
+            0% {
+                width: 0;
+                height: 0;
+                border-color: #fff;
+                transform: translate3d(0, 0, 0) rotate(45deg); }
+            33% {
+                width: .2em;
+                height: 0;
+                transform: translate3d(0, 0, 0) rotate(45deg); }
+            100% {
+                width: .2em;
+                height: .5em;
+                border-color: #fff;
+                transform: translate3d(0, -0.5em, 0) rotate(45deg); } }
 
-        .radio-custom + .radio-custom-label:before {
-            border-radius: 50%;
-        }
+        .form-checkbox__title {
+            color: black; }
 
-        .radio-custom:checked + .radio-custom-label:before {
-            content: "\f00c";
-            font-family: 'FontAwesome';
-            color: #bbb;
-        }
+        .filter-checkboxes {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap; }
+        .filter-checkboxes__block {
+            margin-right: 40px; }
+        .filter-checkboxes__block:last-child {
+            margin-right: 0; }
+        .filter-checkboxes__checkbox {
+            margin-bottom: 20px; }
+        .filter-checkboxes__checkbox:last-child {
+            margin-bottom: 0; }
 
-        .checkbox-custom:focus + .checkbox-custom-label, .radio-custom:focus + .radio-custom-label {
-            outline: 1px solid #ddd; /* focus style */
-        }
+        @media (max-width: 575px) {
+            .filter-checkboxes__block {
+                margin-bottom: 20px; }
+            .filter-checkboxes__block:last-child {
+                margin-bottom: 0; } }
+
+        @media (max-width: 508px) {
+            .filter-checkboxes {
+                display: block; }
+            .filter-checkboxes__block {
+                margin-right: 0; } }
+
+
     </style>
     <title>Document</title>
 </head>
 <body>
-<form>
-    <h2>CSS Radio Buttons and Checkboxes: Custom icon</h2>
-    <h5>Checkboxes and radio buttons with a custom tick icon: Pure CSS.</h5>
-    <p><em>Uses Font Awesome for demo.</em></p>
-    <br>
-
-    <h3>Radio Buttons</h3>
-    <div>
-        <input id="radio-1" class="radio-custom" name="radio-group" type="radio" checked>
-        <label for="radio-1" class="radio-custom-label">First Choice</label>
+<div class="filter-checkboxes">
+    <div class="filter-checkboxes__block">
+        <div class="filter-checkboxes__checkbox">
+            <div class="form-checkbox">
+                <label for="ck1" class="form-checkbox__label">
+                    <input class="form-checkbox__checkbox" type="checkbox" name="ck1" id="ck1"/>
+                    <span></span>
+                    <div class="form-checkbox__title">
+                        Чекбокс 1. Какой то заголовок
+                    </div>
+                </label>
+            </div>
+        </div>
+        <div class="filter-checkboxes__checkbox">
+            <div class="form-checkbox">
+                <label for="ck2" class="form-checkbox__label">
+                    <input class="form-checkbox__checkbox" type="checkbox" name="ck2" id="ck2"/>
+                    <span></span>
+                    <div class="form-checkbox__title">
+                        Чекбокс 1. Какой то заголовок
+                    </div>
+                </label>
+            </div>
+        </div>
+        <div class="filter-checkboxes__checkbox">
+            <div class="form-checkbox">
+                <label for="ck3" class="form-checkbox__label">
+                    <input class="form-checkbox__checkbox" type="checkbox" name="ck3" id="ck3"/>
+                    <span></span>
+                    <div class="form-checkbox__title">
+                        Чекбокс 1. Какой то заголовок
+                    </div>
+                </label>
+            </div>
+        </div>
     </div>
-    <div>
-        <input id="radio-2" class="radio-custom" name="radio-group" type="radio">
-        <label for="radio-2" class="radio-custom-label">Second Choice</label>
+    <div class="filter-checkboxes__block">
+        <div class="filter-checkboxes__checkbox">
+            <div class="form-checkbox">
+                <label for="ck11" class="form-checkbox__label">
+                    <input class="form-checkbox__checkbox" type="checkbox" name="ck11" id="ck11"/>
+                    <span></span>
+                    <div class="form-checkbox__title">
+                        Чекбокс 1. Какой то заголовок
+                    </div>
+                </label>
+            </div>
+        </div>
+        <div class="filter-checkboxes__checkbox">
+            <div class="form-checkbox">
+                <label for="ck21" class="form-checkbox__label">
+                    <input class="form-checkbox__checkbox" type="checkbox" name="ck21" id="ck21"/>
+                    <span></span>
+                    <div class="form-checkbox__title">
+                        Чекбокс 1. Какой то заголовок
+                    </div>
+                </label>
+            </div>
+        </div>
+        <div class="filter-checkboxes__checkbox">
+            <div class="form-checkbox">
+                <label for="ck31" class="form-checkbox__label">
+                    <input class="form-checkbox__checkbox" type="checkbox" name="ck31" id="ck31"/>
+                    <span></span>
+                    <div class="form-checkbox__title">
+                        Чекбокс 1. Какой то заголовок
+                    </div>
+                </label>
+            </div>
+        </div>
     </div>
-    <div>
-        <input id="radio-3" class="radio-custom" name="radio-group" type="radio">
-        <label for="radio-3" class="radio-custom-label">Third Choice</label>
-    </div>
-
-    <h3>Checkboxes</h3>
-    <div>
-        <input id="checkbox-11" class="checkbox-custom" name="checkbox-11" type="checkbox" checked>
-        <label for="checkbox-11" class="checkbox-custom-label">First Choice</label>
-    </div>
-    <div>
-        <input id="checkbox-21" class="checkbox-custom" name="checkbox-21" type="checkbox">
-        <label for="checkbox-21" class="checkbox-custom-label">Second Choice</label>
-    </div>
-    <div>
-        <input id="checkbox-31" class="checkbox-custom" name="checkbox-31" type="checkbox">
-        <label for="checkbox-31" class="checkbox-custom-label">Third Choice</label>
-    </div>
-    </div>
-    <div>
-        <input id="checkbox-113" class="checkbox-custom" name="checkbox-13" type="checkbox" checked>
-        <label for="checkbox-113" class="checkbox-custom-label">First Choice</label>
-    </div>
-    <div>
-        <input id="checkbox-213" class="checkbox-custom" name="checkbox-213" type="checkbox">
-        <label for="checkbox-213" class="checkbox-custom-label">Second Choice</label>
-    </div>
-    <div>
-        <input id="checkbox-313" class="checkbox-custom" name="checkbox-313" type="checkbox">
-        <label for="checkbox-313" class="checkbox-custom-label">Third Choice</label>
-    </div>
-    </div>
-</form>
+</div>
 </body>
 </html>
